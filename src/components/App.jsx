@@ -17,6 +17,25 @@ export class App extends Component {
     cont: [{ id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' }],
   };
 
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    // console.dir(contacts);
+    const parsedContacts = JSON.parse(contacts);
+    // console.dir(parsedContacts);
+    // Если localStorage не пустой, тогда записываем State
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      // console.log('изменился State');
+      // Записываем localStorage, если были изменения State
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   addContact = contact => {
     if (this.state.contacts.find(cont => cont.name === contact.name)) {
       return alert(`${contact.name} is already in contacts.`);

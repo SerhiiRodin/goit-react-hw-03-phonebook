@@ -3,7 +3,7 @@ import { VscCircleSmallFilled } from 'react-icons/vsc';
 import css from './ContactList.module.css';
 
 export function ContactList({ contacts, deleteContact }) {
-  console.log(contacts);
+  // console.log(contacts);
   return (
     <ul className={css['list-wraper']}>
       {contacts.map(({ id, name, number }) => {
